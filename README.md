@@ -10,7 +10,7 @@ We introduce **LILY**, a novel contextual bandit algorithm designed for vectoriz
 
 ## Introduction
 
-Contextual bandit algorithms have become a foundational component in many real-world applications such as online recommendation, personalized advertising, and adaptive decision-making systems. Despite the surge of neural-based models in this area, classical methods like **Thompson Sampling** [1] and **LinUCB** [2] remain highly valuable due to their low computational cost, interpretability, and stable performance under resource-constrained settings. However, each of these classic approaches has its own limitations: LinUCB requires careful tuning of confidence parameters to achieve balanced exploration, while Thompson Sampling often performs abrupt and non-gradual exploration, which may harm user experience in practice.
+Contextual bandit algorithms have become a foundational component in many real-world applications such as online recommendation, personalized advertising, and adaptive decision-making systems. Despite the surge of neural-based models in this area, classical methods like **Thompson Sampling** \[1\] and **LinUCB** \[2\] remain highly valuable due to their low computational cost, interpretability, and stable performance under resource-constrained settings. However, each of these classic approaches has its own limitations: LinUCB requires careful tuning of confidence parameters to achieve balanced exploration, while Thompson Sampling often performs abrupt and non-gradual exploration, which may harm user experience in practice.
 
 In this work, we propose **LILY (Likelihood-based Interpretable Linear Yield-driven algorithm)**, a novel contextual bandit algorithm that builds upon the intuition of per-dimension uncertainty modeling using **Beta distributions**. LILY assumes that the context is represented as a real-valued embedding vector with each coordinate bounded in $[0,1]$ and maintains a count-based belief update mechanism without relying on parameter tuning or explicit reward modeling. Compared to traditional approaches, LILY achieves adaptive and smooth exploration behavior, making it particularly suitable for scenarios with binary or sparse feedback and vectorized inputs such as pretrained embeddings or latent item factors. We highlight LILY’s simplicity, mathematical elegance, and practical utility as key advantages over both classical and deep-learning-based bandits.
 
@@ -20,15 +20,15 @@ In this work, we propose **LILY (Likelihood-based Interpretable Linear Yield-dri
 
 ### Thompson Sampling and Linear Bandits
 
-**Thompson Sampling (TS)** is a well-established approach for exploration in multi-armed bandits based on Bayesian posterior sampling . In its classical form, TS assumes a Bernoulli reward model and maintains Beta distributions for each arm. While elegant and easy to implement, its inherent stochasticity can lead to unstable behavior, especially in early rounds. To address structured contexts, **LinUCB** and **LinTS** [3] extend bandit algorithms to the linear payoff setting, modeling the expected reward as a linear function of the context vector. Note that “LinTS” is a commonly used abbreviation in the literature for the algorithm introduced by Agrawal and Goyal (2013), though it was not explicitly named as such in the original paper. LinUCB uses confidence bounds for exploration, while LinTS performs posterior sampling over the model parameters.
+**Thompson Sampling (TS)** is a well-established approach for exploration in multi-armed bandits based on Bayesian posterior sampling . In its classical form, TS assumes a Bernoulli reward model and maintains Beta distributions for each arm. While elegant and easy to implement, its inherent stochasticity can lead to unstable behavior, especially in early rounds. To address structured contexts, **LinUCB** and **LinTS** \[3\] extend bandit algorithms to the linear payoff setting, modeling the expected reward as a linear function of the context vector. Note that “LinTS” is a commonly used abbreviation in the literature for the algorithm introduced by Agrawal and Goyal (2013), though it was not explicitly named as such in the original paper. LinUCB uses confidence bounds for exploration, while LinTS performs posterior sampling over the model parameters.
 
 ### Embedding-Based Bandits
 
-In recommendation systems, items and users are often represented as dense embedding vectors. Recent work explores how to incorporate such vectorized information into bandit frameworks. For example, **UBM-LinUCB** [4] introduces uncertainty-aware learning in the latent factor space, enhancing LinUCB with prior knowledge from collaborative filtering. Our approach shares a similar motivation leveraging embedding spaces but avoids reliance on confidence parameters by directly modeling click likelihoods using normalized Beta distributions. This results in a more adaptive and lightweight mechanism for vector-based contexts.
+In recommendation systems, items and users are often represented as dense embedding vectors. Recent work explores how to incorporate such vectorized information into bandit frameworks. For example, **UBM-LinUCB** \[4\] introduces uncertainty-aware learning in the latent factor space, enhancing LinUCB with prior knowledge from collaborative filtering. Our approach shares a similar motivation leveraging embedding spaces but avoids reliance on confidence parameters by directly modeling click likelihoods using normalized Beta distributions. This results in a more adaptive and lightweight mechanism for vector-based contexts.
 
 ### Neural Bandits and Graph-based Methods
 
-Neural contextual bandits have emerged to capture complex, nonlinear reward structures. One notable example is **Graph Neural Bandits (GNB)** [5], which integrates graph neural networks with contextual bandits for recommendation. While powerful, these methods often require high computational resources and are typically black-box in nature, making them harder to interpret and deploy in real-time systems. In contrast, LILY focuses on preserving interpretability and efficiency, providing an alternative pathway that sacrifices minimal performance while remaining mathematically grounded and suitable for sparse-feedback regimes.
+Neural contextual bandits have emerged to capture complex, nonlinear reward structures. One notable example is **Graph Neural Bandits (GNB)** \[5\], which integrates graph neural networks with contextual bandits for recommendation. While powerful, these methods often require high computational resources and are typically black-box in nature, making them harder to interpret and deploy in real-time systems. In contrast, LILY focuses on preserving interpretability and efficiency, providing an alternative pathway that sacrifices minimal performance while remaining mathematically grounded and suitable for sparse-feedback regimes.
 
 ---
 
@@ -151,7 +151,11 @@ In contrast to classical methods such as LinUCB, LinTS, and deep neural bandits,
 ## References
 
 \[1\] Russo, D., Van Roy, B., Kazerouni, A., Osband, I., & Wen, Z. (2017). A Tutorial on Thompson Sampling. arXiv preprint arXiv:1707.02038.
+
 \[2\] Li, L., Chu, W., Langford, J., & Schapire, R. E. (2010). A Contextual-Bandit Approach to Personalized News Article Recommendation. arXiv preprint arXiv:1003.0146.
+
 \[3\] Agrawal, S., & Goyal, N. (2012). Thompson Sampling for Contextual Bandits with Linear Payoffs. arXiv preprint arXiv:1209.3352.
+
 \[4\] He, X., An, B., Li, Y., Chen, H., Guo, Q., Li, X., & Wang, Z. (2020). Contextual User Browsing Bandits for Large-Scale Online Mobile Recommendation. arXiv preprint arXiv:2008.09368.
+
 \[5\] Qi, Y., Ban, Y., & He, J. (2023). Graph Neural Bandits. arXiv preprint arXiv:2308.10808.
