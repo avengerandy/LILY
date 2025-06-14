@@ -34,6 +34,8 @@ Neural contextual bandits have emerged to capture complex, nonlinear reward stru
 
 ## Algorithm Details
 
+![algorithm](https://raw.githubusercontent.com/avengerandy/LILY/master/algorithm.png)
+
 LILY is designed to balance interpretability, adaptivity, and low computational cost. It models user click feedback as independent observations on each embedding dimension and maintains Beta distributions to estimate the likelihood of clicks along each dimension. The algorithm computes a score for each candidate item by evaluating its embedding vector under the current per-dimension Beta distributions. This section introduces the key components of LILY’s design.
 
 ### Problem Setup
